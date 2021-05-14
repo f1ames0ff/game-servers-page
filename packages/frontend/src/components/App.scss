@@ -1,0 +1,50 @@
+@import "src/theme";
+
+.App {
+  &-root-wrapper {
+    background-size: 100% auto;
+    background-repeat: revert;
+    background-position: top;
+  }
+
+  &-container {
+    background-color: $app-container;
+
+    header {
+    }
+
+    section {
+    }
+
+    footer {
+    }
+  }
+
+  &-nav-link, &-nav-link:visited {
+    @extend .nav-link;
+
+    display: inline-block;
+    padding: 0;
+    color: $app-link;
+    font-weight: bold;
+  }
+
+  &-list-group {
+    @extend .list-group;
+
+    > .list-group-item {
+      color: $app-text;
+      background-color: $app-container;
+    }
+  }
+
+  &-badge {
+    @extend .badge;
+    background-color: $app-badge-bg;
+    color: $app-badge-text;
+  }
+}
+
+.game-page {
+  background-color: $app-container;
+}
