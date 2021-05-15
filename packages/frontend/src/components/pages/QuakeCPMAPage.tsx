@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { appStore } from "../../store/store";
-import { updateBackground } from "../../store/app.reducer";
+import { updateBackground } from "../../store/reducers/app.reducer";
 import { IMAGES } from "../../constants";
 import { PageWrapper } from "./PageWrapper";
 import { AppTextBlock } from "../AppTextBlock";

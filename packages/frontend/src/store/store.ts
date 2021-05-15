@@ -1,5 +1,5 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import generalSlice from "./app.reducer";
+import generalSlice from "./reducers/app.reducer";
 
 export const appStore = configureStore({
     reducer: combineReducers({

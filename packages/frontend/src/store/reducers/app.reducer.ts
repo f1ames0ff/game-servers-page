@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { SERVER_URL } from "../constants";
+import { SERVER_URL } from "../../constants";
 
 
 const generalSlice = createSlice({

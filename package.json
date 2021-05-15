@@ -1,14 +1,13 @@
 {
   "name": "f1am3d-games-web-page",
-  "version": "1.0.0",
   "private": true,
-  "workspaces": {
-    "packages": [
-      "packages/backend",
-      "packages/frontend"
-    ]
-  },
+  "workspaces": [
+    "packages/*"
+  ],
   "dependencies": {
     "lerna": "^4.0.0"
+  },
+  "scripts": {
+    "bootstrap": "lerna bootstrap --use-workspaces"
   }
 }
