@@ -1,18 +1,11 @@
 import { Module } from '@nestjs/common';
-import { ServeStaticModule } from '@nestjs/serve-static';
-import path from 'path';
 import { FilesController } from "../controllers/files.controller";
-import { StaticController } from "../controllers/static.controller";
 import { FilesService } from "../services/files.service";
+import { MainController } from "../controllers/main.controller";
 
 @Module({
-    imports: [
-        ServeStaticModule.forRoot({
-            rootPath: path.join(__dirname, '../..', 'public/static'),
-        }),
-    ],
     controllers: [
-        StaticController,
+        MainController,
         FilesController
     ],
     providers: [FilesService],
