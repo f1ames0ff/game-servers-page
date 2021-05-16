@@ -51,7 +51,7 @@ function App(props: ReturnType<typeof mapStateToProps>) {
                                 <DiscordPage/>
                             </Route>
 
-                            <Route path="/">
+                            <Route exact path="/">
                                 <HomePage/>
                             </Route>
                         </Switch>

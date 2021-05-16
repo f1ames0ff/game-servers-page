@@ -1,5 +1,5 @@
 import axios from "axios";
-import { SERVER_URL } from "../constants";
+import { getHostAddress } from "../utils/http.utils";
 
 
 export type FileType = 'valheim' | 'quake-cpma' | string;
@@ -15,7 +15,7 @@ export interface FileList {
 
 
 export function loadFileList(type: FileType) {
-    const url = `${ SERVER_URL }/files/list`;
+    const url = `${ getHostAddress() }/files/list`;
 
     return axios.get<FileTree>(url, {
         params: { type }
@@ -23,7 +23,7 @@ export function loadFileList(type: FileType) {
 }
 
 export function downloadFile(fileUri: string) {
-    const url = `${ SERVER_URL }/files/download`;
+    const url = `${ getHostAddress() }/files/download`;
 
     return axios.get<ArrayBuffer>(url, {
         params: { fileName: fileUri },

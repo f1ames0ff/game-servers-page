@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { SERVER_URL } from "../../constants";
+import { getHostAddress } from "../../utils/http.utils";
 
 
 const generalSlice = createSlice({
@@ -11,7 +11,7 @@ const generalSlice = createSlice({
 
     reducers: {
         updateBackground(state, action: PayloadAction<string>) {
-            state.background = `${ SERVER_URL }/images/${ action.payload }`;
+            state.background = `${ getHostAddress() }/images/${ action.payload }`;
             return state;
         }
     }

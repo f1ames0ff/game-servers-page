@@ -1,8 +1,7 @@
-import { Controller, Get, Redirect } from "@nestjs/common";
+import { Controller, Get, Redirect, Res } from "@nestjs/common";
+import { Response } from "express";
+import path from "path";
 
 @Controller()
 export class MainController {
-    @Get('*')
-    @Redirect('/', 301)
-    defaul(){}
 }
