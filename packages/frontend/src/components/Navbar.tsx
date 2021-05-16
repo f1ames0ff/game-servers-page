@@ -1,22 +1,22 @@
+import './navbar.scss';
 import React from "react";
 import { Link } from "react-router-dom";
 
 
 export function Navbar() {
-    return <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+    const iconSrc = `https://static-cdn.jtvnw.net/jtv_user_pictures/10ac9390-d81e-4962-9253-7bde85964995-profile_image-70x70.png`;
+
+    return <nav className="App-navbar navbar navbar-expand-lg navbar-dark bg-dark">
         <div className="container-fluid">
+            <div className="icon">
+                <img className="img-thumbnail"
+                     src={ iconSrc }
+                     width={ 64 }
+                     alt="..."/>
+            </div>
+
             <Link className="navbar-brand"
                   to="/">f1am3d games</Link>
-
-            <button className="navbar-toggler"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation">
-                <span className="navbar-toggler-icon"></span>
-            </button>
 
             <div className="collapse navbar-collapse"
                  id="navbarSupportedContent">
@@ -44,7 +44,14 @@ export function Navbar() {
                     <li className="nav-item">
                         <Link className="nav-link"
                               to="/discord">
-                            <b>Discord</b>
+                            Discord
+                        </Link>
+                    </li>
+
+                    <li className="nav-item">
+                        <Link className="nav-link"
+                              to="/support">
+                            <b>Поддержать</b>
                         </Link>
                     </li>
                 </ul>

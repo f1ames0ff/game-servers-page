@@ -2,22 +2,22 @@ import axios from "axios";
 import { getHostAddress } from "../utils/http.utils";
 
 
-export type FileType = 'valheim' | 'quake-cpma' | string;
+export type AppFileType = 'valheim' | 'quake-cpma' | string;
 
-export interface FileTree {
-    optional: FileList
-    required: FileList
+export interface AppFileTree {
+    optional: AppFileList
+    required: AppFileList
 }
 
-export interface FileList {
+export interface AppFileList {
     [key: string]: { size: number }
 }
 
 
-export function loadFileList(type: FileType) {
+export function loadFileList(type: AppFileType) {
     const url = `${ getHostAddress() }/files/list`;
 
-    return axios.get<FileTree>(url, {
+    return axios.get<AppFileTree>(url, {
         params: { type }
     }).then(response => response.data);
 }

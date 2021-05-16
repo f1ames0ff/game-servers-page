@@ -5,5 +5,5 @@ interface Props {
 }
 
 export function AppSubTitle(props: Props) {
-    return <h1 className="display-5 p-4">{ props.children }</h1>
+    return <article><h2 className="display-5 p-4">{ props.children }</h2></article>
 }

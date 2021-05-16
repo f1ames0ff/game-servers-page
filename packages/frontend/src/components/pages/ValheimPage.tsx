@@ -8,20 +8,21 @@ import { AppSubTitle } from "../AppSubTitle";
 import { AppBadge } from "../AppBadge";
 import { PageWrapper } from "./PageWrapper";
 import { Link } from 'react-router-dom';
-import { downloadFile, loadFileList } from "../../api/files.api";
-import { blobToFileDownload, formatBytes } from "../../utils/files.utils";
+import { AppFileList, loadFileList } from "../../api/files.api";
+import { formatBytes } from "../../utils/files.utils";
+import { downloadFileThunk } from "../../store/thunks/download.thunk";
 
 type ModType = 'required' | 'optional';
 
 export function ValheimPage() {
-    const [ requiredMods, setRequiredMods ] = useState({} as FileList);
-    const [ optionalMods, setOptionalMods ] = useState({} as FileList);
+    const [ requiredMods, setRequiredMods ] = useState<AppFileList>({});
+    const [ optionalMods, setOptionalMods ] = useState<AppFileList>({});
     const type = 'valheim';
 
     useEffect(() => {
         appStore.dispatch(updateBackground(IMAGES.valheim[0]));
 
-        loadFileList('valheim').then(data => {
+        loadFileList(type).then(data => {
             let { required, optional } = data;
 
             setRequiredMods(required as any);
@@ -33,10 +34,7 @@ export function ValheimPage() {
     }, []);
 
     async function download(modType: ModType, name: string) {
-        const uri = `${ type }/${ modType }/${ name }`;
-        const buffer = await downloadFile(uri);
-
-        blobToFileDownload(new Blob([ buffer ]), name);
+        appStore.dispatch(downloadFileThunk({ modType, name, type }));
     }
 
     return <PageWrapper id="valheim-page"
@@ -52,9 +50,9 @@ export function ValheimPage() {
 
         <AppSubTitle>Адрес сервера</AppSubTitle>
 
-        <h4>
+        <h2>
             <AppBadge>f1am3d.servegame.com:2456</AppBadge>
-        </h4>
+        </h2>
 
         <AppTextBlock>
             <p>Пароль к серверу можно узнать в <Link className="App-nav-link"

@@ -28,6 +28,10 @@
     padding: 0;
     color: $app-link;
     font-weight: bold;
+
+    &:hover {
+      color: $app-link-hover;
+    }
   }
 
   &-list-group {

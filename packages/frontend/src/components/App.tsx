@@ -10,6 +10,7 @@ import { Navbar } from './Navbar';
 import { QuakeCPMAPage } from "./pages/QuakeCPMAPage";
 import { QuakeQ2Page } from "./pages/Quake2Page";
 import { QuakeQWPage } from "./pages/QuakeQWPage";
+import { SupportPage } from "./pages/SupportPage";
 
 
 const mapStateToProps = (state: AppState) => ( { background: state.general.background } );
@@ -49,6 +50,10 @@ function App(props: ReturnType<typeof mapStateToProps>) {
 
                             <Route path="/discord">
                                 <DiscordPage/>
+                            </Route>
+
+                            <Route path="/support">
+                                <SupportPage/>
                             </Route>
 
                             <Route exact path="/">

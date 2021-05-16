@@ -5,5 +5,5 @@ interface Props {
 }
 
 export function AppTextBlock(props: Props) {
-    return <p className="p-4">{ props.children }</p>
+    return <article><p className="p-4">{ props.children }</p></article>
 }
