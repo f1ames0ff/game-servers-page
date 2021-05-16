@@ -11,15 +11,17 @@ import { downloadFileThunk, ModType } from "../../store/thunks/download.thunk";
 
 export function QuakeCPMAPage() {
     const [ requiredMods, setRequiredMods ] = useState<AppFileList>({});
+    const [ optionalMods, setOptionalMods ] = useState<AppFileList>({});
     const type = 'quake-cpma';
 
     useEffect(() => {
         appStore.dispatch(updateBackground(IMAGES.quake.q3[0]));
 
         loadFileList(type).then(data => {
-            let { required } = data;
+            let { required, optional } = data;
 
             setRequiredMods(required);
+            setOptionalMods(optional);
         }).catch(error => {
             console.error(new Error('Unable to load file list.'));
             throw error;
@@ -64,6 +66,27 @@ export function QuakeCPMAPage() {
                                 className="list-group-item d-flex justify-content-between align-items-center">
                             <span className="App-nav-link"
                                   onClick={ () => download('required', key) }>{ key }</span>
+
+                                <span className="App-badge rounded-pill">{ formatBytes(value.size) }</span>
+                            </li>
+                    )
+                }
+            </ul>
+        </article>
+
+        <hr/>
+
+        <article>
+            <AppSubTitle>Рекомендуемые моды</AppSubTitle>
+
+            <ul className="App-list-group pb-4">
+                {
+                    Object.entries(optionalMods ?? {}).map(
+                        ([ key, value ]) =>
+                            <li key={ key }
+                                className="list-group-item d-flex justify-content-between align-items-center">
+                            <span className="App-nav-link"
+                                  onClick={ () => download('optional', key) }>{ key }</span>
 
                                 <span className="App-badge rounded-pill">{ formatBytes(value.size) }</span>
                             </li>

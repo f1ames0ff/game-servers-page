@@ -1,5 +1,9 @@
 export const IMAGES = {
-    general: ['general/1.jpg'],
+    general: [
+        'general/1.jpg',
+        'general/pro100.skill.jpg',
+        'general/pro100.skill-16x9.jpg',
+    ],
     discord: ['discord/1.jpg'],
     support: ['support/1.jpg'],
     valheim: ['valheim/1.png'],

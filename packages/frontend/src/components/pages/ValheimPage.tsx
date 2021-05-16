@@ -61,41 +61,45 @@ export function ValheimPage() {
 
         <hr/>
 
-        <AppSubTitle>Необходимые моды</AppSubTitle>
+        <article>
+            <AppSubTitle>Необходимые моды</AppSubTitle>
 
-        <ul className="App-list-group pb-4">
-            {
-                Object.entries(requiredMods ?? {}).map(
-                    ([ key, value ]) =>
-                        <li key={ key }
-                            className="list-group-item d-flex justify-content-between align-items-center">
+            <ul className="App-list-group pb-4">
+                {
+                    Object.entries(requiredMods ?? {}).map(
+                        ([ key, value ]) =>
+                            <li key={ key }
+                                className="list-group-item d-flex justify-content-between align-items-center">
                             <span className="App-nav-link"
                                   onClick={ () => download('required', key) }>{ key }</span>
 
-                            <span className="App-badge rounded-pill">{ formatBytes(value.size) }</span>
-                        </li>
-                )
-            }
-        </ul>
+                                <span className="App-badge rounded-pill">{ formatBytes(value.size) }</span>
+                            </li>
+                    )
+                }
+            </ul>
+        </article>
 
         <hr/>
 
-        <AppSubTitle>Рекомендуемые моды</AppSubTitle>
+        <article>
+            <AppSubTitle>Рекомендуемые моды</AppSubTitle>
 
-        <ul className="App-list-group pb-4">
-            {
-                Object.entries(optionalMods ?? {}).map(
-                    ([ key, value ]) =>
-                        <li key={ key }
-                            className="list-group-item d-flex justify-content-between align-items-center">
+            <ul className="App-list-group pb-4">
+                {
+                    Object.entries(optionalMods ?? {}).map(
+                        ([ key, value ]) =>
+                            <li key={ key }
+                                className="list-group-item d-flex justify-content-between align-items-center">
                             <span className="App-nav-link"
                                   onClick={ () => download('optional', key) }>{ key }</span>
 
-                            <span className="App-badge rounded-pill">{ formatBytes(value.size) }</span>
-                        </li>
-                )
-            }
-        </ul>
+                                <span className="App-badge rounded-pill">{ formatBytes(value.size) }</span>
+                            </li>
+                    )
+                }
+            </ul>
+        </article>
 
     </PageWrapper>
 }

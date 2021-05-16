@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 export function Navbar() {
     const iconSrc = `https://static-cdn.jtvnw.net/jtv_user_pictures/10ac9390-d81e-4962-9253-7bde85964995-profile_image-70x70.png`;
 
-    return <nav className="App-navbar navbar navbar-expand-lg navbar-dark bg-dark">
+    return <nav className="App-navbar navbar  container navbar-expand-lg navbar-dark bg-dark">
         <div className="container-fluid">
             <div className="icon">
                 <img className="img-thumbnail"
@@ -16,7 +16,7 @@ export function Navbar() {
             </div>
 
             <Link className="navbar-brand"
-                  to="/">f1am3d games</Link>
+                  to="/">pro100.skill</Link>
 
             <div className="collapse navbar-collapse"
                  id="navbarSupportedContent">

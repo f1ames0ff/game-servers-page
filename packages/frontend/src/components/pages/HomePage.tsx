@@ -8,13 +8,13 @@ import { Link } from "react-router-dom";
 
 export function HomePage() {
     useEffect(() => {
-        appStore.dispatch(updateBackground(IMAGES.general[0]));
+        appStore.dispatch(updateBackground(IMAGES.general[1]));
     }, []);
 
     return <PageWrapper id="discord-page"
-                        title="f1am3d Games Community">
+                        title="pro100.skill Community">
         <AppTextBlock>
-            Добро пожаловать в сообщество <b>f1am3d Games</b>!
+            Добро пожаловать в сообщество <b>pro100.skill</b>!
         </AppTextBlock>
 
         <AppTextBlock>

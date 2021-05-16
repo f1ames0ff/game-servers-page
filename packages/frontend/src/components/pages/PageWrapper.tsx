@@ -1,5 +1,5 @@
 import { AppTitle } from "../AppTitle";
-import React from "react";
+import React, { useEffect } from "react";
 
 interface Props {
     id: string;
@@ -8,6 +8,10 @@ interface Props {
 }
 
 export function PageWrapper(props: Props) {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     return <div className="game-page container flex-grow-1 h-100"
                 id={ props.id }>
         <div className="row justify-content-center">

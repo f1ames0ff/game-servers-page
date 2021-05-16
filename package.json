@@ -1,5 +1,5 @@
 {
-  "name": "f1am3d-games-web-page",
+  "name": "pro100.skill-web-page",
   "private": true,
   "workspaces": [
     "packages/*"

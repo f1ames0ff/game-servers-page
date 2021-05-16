@@ -23,13 +23,13 @@ function App(props: ReturnType<typeof mapStateToProps>) {
              } }>
 
             <div className="App-container container min-vh-100 d-flex flex-column">
-                <header className="row justify-content-center ">
+                <header className="row justify-content-center" id="navbar">
                     <div className="col-12">
                         <Navbar/>
                     </div>
                 </header>
 
-                <section className="row pt-2 flex-grow-1">
+                <section className="row pt-5 flex-grow-1">
                     <div className="col-12">
                         <Switch>
                             <Route path="/valheim">

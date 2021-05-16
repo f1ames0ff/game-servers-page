@@ -1,5 +1,14 @@
 @import "src/theme";
 
+#navbar {
+  > div {
+    position: fixed;
+    width: 100%;
+    padding: 0;
+    z-index: 5;
+  }
+}
+
 .App {
   &-root-wrapper {
     background-size: 100% auto;
@@ -10,13 +19,14 @@
   &-container {
     background-color: $app-container;
 
-    header {
+    > header {
     }
 
-    section {
+    > section {
+      margin-top: 40px;
     }
 
-    footer {
+    > footer {
     }
   }
 
