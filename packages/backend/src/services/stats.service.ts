@@ -1,19 +1,22 @@
 import { Injectable } from "@nestjs/common";
 import { exec } from "child_process";
 import { Type } from 'gamedig';
+import { ConfigService } from "./config.service";
 
 export type GameType = Type | 'valheim';
 
 @Injectable()
 export class StatsService {
-    private ip = '89.177.116.121';
+    constructor(private configService: ConfigService) {
+    }
 
     async queryServer(type: GameType, port: number) {
-        const host = `${ this.ip }:${ port }`;
+        const { host } = this.configService;
+        const address = `${ host }:${ port }`;
 
         return new Promise<object>((resolve, reject) => {
             exec(
-                `gamedig --type ${ type } ${ host }`,
+                `gamedig --type ${ type } ${ address }`,
                 (error, stdout, stderr) => {
                     if (error) {
                         console.log(`error: ${ error.message }`);
