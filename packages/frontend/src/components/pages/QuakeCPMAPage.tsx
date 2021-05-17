@@ -8,11 +8,19 @@ import { AppBadge } from "../AppBadge";
 import { formatBytes } from "../../utils/files.utils";
 import { AppFileList, loadFileList } from "../../api/files.api";
 import { downloadFileThunk, ModType } from "../../store/thunks/download.thunk";
+import { ServerStats } from "../ServerStats";
+import { ServerStatsPayload } from "../../../../shared/types";
+import { loadMonitoringStats } from "../../api/monitor.api";
+import { getGameTrackerMapImageUrl } from "../../utils/game-tracker.utils";
+import { AppTitleSmall } from "../AppTitleSmall";
 
 export function QuakeCPMAPage() {
     const [ requiredMods, setRequiredMods ] = useState<AppFileList>({});
     const [ optionalMods, setOptionalMods ] = useState<AppFileList>({});
+    const [ stats, setStats ] = useState<ServerStatsPayload>({} as ServerStatsPayload);
+    const [ mapImageUrl, setMapImageUrl ] = useState<string>('');
     const type = 'quake-cpma';
+    const serverPort = 27960;
 
     useEffect(() => {
         appStore.dispatch(updateBackground(IMAGES.quake.q3[0]));
@@ -26,6 +34,15 @@ export function QuakeCPMAPage() {
             console.error(new Error('Unable to load file list.'));
             throw error;
         });
+
+        loadMonitoringStats('quake3', serverPort).then((data) => {
+            const url = getGameTrackerMapImageUrl(data);
+
+            setStats(data);
+            setMapImageUrl(url);
+        }).catch(error => {
+            console.error(error);
+        });
     }, []);
 
     function download(modType: ModType, name: string) {
@@ -35,64 +52,48 @@ export function QuakeCPMAPage() {
     return <PageWrapper id="quake-cpma-page"
                         title="Quake 3 CPMA">
 
-        <article>
-            <AppSubTitle>
-                Дуэльный сервер
-            </AppSubTitle>
 
-            <h2>
-                <AppBadge>f1am3d.servegame.com:27960</AppBadge>
-            </h2>
+        <AppSubTitle>Мониторинг</AppSubTitle>
 
-            <a href="https://www.gametracker.com/server_info/89.177.116.121:27960/"
-               target="_blank">
-                <img src="https://cache.gametracker.com/server_info/89.177.116.121:27960/b_560_95_1.png"
-                     width="560"
-                     height="95"
-                     alt=""/>
-            </a>
-        </article>
+        <ServerStats stats={ stats }
+                     image={ mapImageUrl }
+                     address={ `f1am3d.servegame.com:${ serverPort }` }/>
 
         <hr/>
 
-        <article>
-            <AppSubTitle>Необходимые моды</AppSubTitle>
+        <AppSubTitle>Моды</AppSubTitle>
+        <AppTitleSmall>Необходимые</AppTitleSmall>
 
-            <ul className="App-list-group pb-4">
-                {
-                    Object.entries(requiredMods ?? {}).map(
-                        ([ key, value ]) =>
-                            <li key={ key }
-                                className="list-group-item d-flex justify-content-between align-items-center">
+        <ul className="App-list-group pb-4">
+            {
+                Object.entries(requiredMods ?? {}).map(
+                    ([ key, value ]) =>
+                        <li key={ key }
+                            className="list-group-item d-flex justify-content-between align-items-center">
                             <span className="App-nav-link"
                                   onClick={ () => download('required', key) }>{ key }</span>
 
-                                <span className="App-badge rounded-pill">{ formatBytes(value.size) }</span>
-                            </li>
-                    )
-                }
-            </ul>
-        </article>
+                            <span className="App-badge rounded-pill">{ formatBytes(value.size) }</span>
+                        </li>
+                )
+            }
+        </ul>
 
-        <hr/>
+        <AppTitleSmall>Рекомендуемые</AppTitleSmall>
 
-        <article>
-            <AppSubTitle>Рекомендуемые моды</AppSubTitle>
-
-            <ul className="App-list-group pb-4">
-                {
-                    Object.entries(optionalMods ?? {}).map(
-                        ([ key, value ]) =>
-                            <li key={ key }
-                                className="list-group-item d-flex justify-content-between align-items-center">
+        <ul className="App-list-group pb-4">
+            {
+                Object.entries(optionalMods ?? {}).map(
+                    ([ key, value ]) =>
+                        <li key={ key }
+                            className="list-group-item d-flex justify-content-between align-items-center">
                             <span className="App-nav-link"
                                   onClick={ () => download('optional', key) }>{ key }</span>
 
-                                <span className="App-badge rounded-pill">{ formatBytes(value.size) }</span>
-                            </li>
-                    )
-                }
-            </ul>
-        </article>
+                            <span className="App-badge rounded-pill">{ formatBytes(value.size) }</span>
+                        </li>
+                )
+            }
+        </ul>
     </PageWrapper>
 }

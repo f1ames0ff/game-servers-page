@@ -1,0 +1,33 @@
+export interface IDTech3 {
+    ".admin."?:         string;
+    ".location"?:       string;
+    game?:              string;
+    gamedate?:          string;
+    gamename?:          string;
+    gameversion?:       string;
+    GTV_CN?:            string;
+    g_gametype?:        string;
+    g_maxGameClients?:  string;
+    g_needpass?:        string;
+    mapname?:           string;
+    mode_current?:      string;
+    Players_Active?:    string;
+    protocol?:          string;
+    Score_Blue?:        string;
+    Score_Red?:         string;
+    Score_Time?:        string;
+    server_gameplay?:   string;
+    sv_allowDownload?:  string;
+    sv_arenas?:         string;
+    sv_currentPak?:     string;
+    sv_floodProtect?:   string;
+    sv_fps?:            string;
+    sv_hostname?:       string;
+    sv_maxclients?:     string;
+    sv_maxPing?:        string;
+    sv_maxRate?:        string;
+    sv_minPing?:        string;
+    sv_minRate?:        string;
+    sv_privateClients?: string;
+    version?:           string;
+}

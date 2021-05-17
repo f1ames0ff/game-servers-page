@@ -1,5 +1,5 @@
 {
-  "name": "backend",
+  "name": "@app/backend",
   "version": "1.0.0",
   "private": true,
   "dependencies": {
@@ -28,6 +28,7 @@
   },
   "scripts": {
     "start": "ts-node src/main.ts --port 3123",
-    "test": "jest"
+    "test": "jest",
+    "postinstall": "yarn link @app/shared"
   }
 }

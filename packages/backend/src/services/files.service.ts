@@ -1,7 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import fsPromises from "fs/promises";
 import path from "path";
-import fs, { ReadStream } from "fs";
 import { Response } from "express";
 
 interface FileInfo {

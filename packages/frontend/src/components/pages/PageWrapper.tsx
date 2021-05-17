@@ -12,7 +12,7 @@ export function PageWrapper(props: Props) {
         window.scrollTo(0, 0);
     }, []);
 
-    return <div className="game-page container flex-grow-1 h-100"
+    return <div className="game-page container flex-grow-1 h-100 pb-5"
                 id={ props.id }>
         <div className="row justify-content-center">
             <div className="col-8 text-center">

@@ -1,4 +1,4 @@
-import './valheim.scss';
+import './Valheim.scss';
 import React, { useEffect, useState } from "react";
 import { appStore } from "../../store/store";
 import { updateBackground } from "../../store/reducers/app.reducer";
@@ -11,12 +11,20 @@ import { Link } from 'react-router-dom';
 import { AppFileList, loadFileList } from "../../api/files.api";
 import { formatBytes } from "../../utils/files.utils";
 import { downloadFileThunk } from "../../store/thunks/download.thunk";
+import { ServerStats } from "../ServerStats";
+import { ServerStatsPayload } from '@app/shared/types';
+import { loadMonitoringStats } from 'src/api/monitor.api';
+import { getHostAddress } from "../../utils/http.utils";
+import { AppTitleSmall } from '../AppTitleSmall';
 
 type ModType = 'required' | 'optional';
+
 
 export function ValheimPage() {
     const [ requiredMods, setRequiredMods ] = useState<AppFileList>({});
     const [ optionalMods, setOptionalMods ] = useState<AppFileList>({});
+    const [ stats, setStats ] = useState<ServerStatsPayload>({} as ServerStatsPayload);
+    const serverPort = 2456;
     const type = 'valheim';
 
     useEffect(() => {
@@ -30,6 +38,12 @@ export function ValheimPage() {
         }).catch(error => {
             console.error(new Error('Unable to load file list.'));
             throw error;
+        });
+
+        loadMonitoringStats('valheim', serverPort).then((data) => {
+            setStats(data);
+        }).catch(error => {
+            console.error(error);
         });
     }, []);
 
@@ -48,11 +62,11 @@ export function ValheimPage() {
 
         <hr/>
 
-        <AppSubTitle>Адрес сервера</AppSubTitle>
+        <AppSubTitle>Мониторинг</AppSubTitle>
 
-        <h2>
-            <AppBadge>f1am3d.servegame.com:2456</AppBadge>
-        </h2>
+        <ServerStats stats={ stats }
+                     image={ `${ getHostAddress() }/images/valheim/76646264e726fe76903a81cd.jpg` }
+                     address={ `f1am3d.servegame.com:${ serverPort }` }/>
 
         <AppTextBlock>
             <p>Пароль к серверу можно узнать в <Link className="App-nav-link"
@@ -61,45 +75,40 @@ export function ValheimPage() {
 
         <hr/>
 
-        <article>
-            <AppSubTitle>Необходимые моды</AppSubTitle>
+        <AppSubTitle>Моды</AppSubTitle>
+        <AppTitleSmall>Необходимые</AppTitleSmall>
 
-            <ul className="App-list-group pb-4">
-                {
-                    Object.entries(requiredMods ?? {}).map(
-                        ([ key, value ]) =>
-                            <li key={ key }
-                                className="list-group-item d-flex justify-content-between align-items-center">
+        <ul className="App-list-group pb-4">
+            {
+                Object.entries(requiredMods ?? {}).map(
+                    ([ key, value ]) =>
+                        <li key={ key }
+                            className="list-group-item d-flex justify-content-between align-items-center">
                             <span className="App-nav-link"
                                   onClick={ () => download('required', key) }>{ key }</span>
 
-                                <span className="App-badge rounded-pill">{ formatBytes(value.size) }</span>
-                            </li>
-                    )
-                }
-            </ul>
-        </article>
+                            <span className="App-badge rounded-pill">{ formatBytes(value.size) }</span>
+                        </li>
+                )
+            }
+        </ul>
 
-        <hr/>
+        <AppTitleSmall>Рекомендуемые</AppTitleSmall>
 
-        <article>
-            <AppSubTitle>Рекомендуемые моды</AppSubTitle>
-
-            <ul className="App-list-group pb-4">
-                {
-                    Object.entries(optionalMods ?? {}).map(
-                        ([ key, value ]) =>
-                            <li key={ key }
-                                className="list-group-item d-flex justify-content-between align-items-center">
+        <ul className="App-list-group pb-4">
+            {
+                Object.entries(optionalMods ?? {}).map(
+                    ([ key, value ]) =>
+                        <li key={ key }
+                            className="list-group-item d-flex justify-content-between align-items-center">
                             <span className="App-nav-link"
                                   onClick={ () => download('optional', key) }>{ key }</span>
 
-                                <span className="App-badge rounded-pill">{ formatBytes(value.size) }</span>
-                            </li>
-                    )
-                }
-            </ul>
-        </article>
+                            <span className="App-badge rounded-pill">{ formatBytes(value.size) }</span>
+                        </li>
+                )
+            }
+        </ul>
 
     </PageWrapper>
 }

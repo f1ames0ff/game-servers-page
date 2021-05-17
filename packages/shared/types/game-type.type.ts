@@ -1,0 +1,1 @@
+export type AppGameType = 'quake1' | 'quake2' | 'quake3' | 'valheim';
