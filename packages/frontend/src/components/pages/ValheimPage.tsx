@@ -12,7 +12,7 @@ import { AppFileList, loadFileList } from "../../api/files.api";
 import { formatBytes } from "../../utils/files.utils";
 import { downloadFileThunk } from "../../store/thunks/download.thunk";
 import { ServerStats } from "../ServerStats";
-import { ServerStatsPayload } from '@app/shared/types';
+import { ServerStatsPayload, Valheim } from '@app/shared/types';
 import { loadMonitoringStats } from 'src/api/monitor.api';
 import { getHostAddress } from "../../utils/http.utils";
 import { AppTitleSmall } from '../AppTitleSmall';
@@ -40,7 +40,7 @@ export function ValheimPage() {
             throw error;
         });
 
-        loadMonitoringStats('valheim', serverPort).then((data) => {
+        loadMonitoringStats<Valheim>('valheim', serverPort).then((data) => {
             setStats(data);
         }).catch(error => {
             console.error(error);
@@ -66,6 +66,7 @@ export function ValheimPage() {
 
         <ServerStats stats={ stats }
                      image={ `${ getHostAddress() }/images/valheim/76646264e726fe76903a81cd.jpg` }
+                     gameType="default"
                      address={ `f1am3d.servegame.com:${ serverPort }` }/>
 
         <AppTextBlock>

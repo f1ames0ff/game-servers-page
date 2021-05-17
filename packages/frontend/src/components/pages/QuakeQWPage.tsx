@@ -6,15 +6,15 @@ import { PageWrapper } from "./PageWrapper";
 import { AppSubTitle } from "../AppSubTitle";
 import { ServerStats } from "../ServerStats";
 import { loadMonitoringStats } from "../../api/monitor.api";
-import { ServerStatsPayload } from "../../../../shared/types";
+import { IDTech1, ServerStatsPayload } from "../../../../shared/types";
 import { getGameTrackerMapImageUrl } from "../../utils/game-tracker.utils";
-import { AppTitleSmall } from "../AppTitleSmall";
 import { AppTextBlock } from "../AppTextBlock";
 
 export function QuakeQWPage() {
     const [ duelStats, setDuelStats ] = useState<ServerStatsPayload>({} as ServerStatsPayload);
     const [ dmStats, setDmStats ] = useState<ServerStatsPayload>({} as ServerStatsPayload);
-    const [ mapImageUrl, setMapImageUrl ] = useState<string>('');
+    const [ dmMapImageUrl, setDmMapImageUrl ] = useState<string>('');
+    const [ duelMapImageUrl, setDuelMapImageUrl ] = useState<string>('');
     const serverPorts = {
         duel: 27501,
         dm: 27500
@@ -23,20 +23,21 @@ export function QuakeQWPage() {
     useEffect(() => {
         appStore.dispatch(updateBackground(IMAGES.quake.qw[0]));
 
-        loadMonitoringStats('quake1', serverPorts.duel).then((data) => {
-            const url = getGameTrackerMapImageUrl(data);
+        loadMonitoringStats<IDTech1>('quake1', serverPorts.duel)
+            .then((data) => {
+                const url = getGameTrackerMapImageUrl(data);
 
-            setDuelStats(data);
-            setMapImageUrl(url);
-        }).catch(error => {
+                setDuelStats(data);
+                setDuelMapImageUrl(url);
+            }).catch(error => {
             console.error(error);
         });
 
-        loadMonitoringStats('quake1', serverPorts.dm).then((data) => {
+        loadMonitoringStats<IDTech1>('quake1', serverPorts.dm).then((data) => {
             const url = getGameTrackerMapImageUrl(data);
 
             setDmStats(data);
-            setMapImageUrl(url);
+            setDmMapImageUrl(url);
         }).catch(error => {
             console.error(error);
         });
@@ -47,15 +48,17 @@ export function QuakeQWPage() {
 
         <AppSubTitle>Мониторинг</AppSubTitle>
 
-        <ServerStats stats={ dmStats }
-                     image={ mapImageUrl }
-                     address={ `f1am3d.servegame.com:${ serverPorts.dm }` }/>
+        <ServerStats stats={ duelStats }
+                     image={ duelMapImageUrl }
+                     gameType="Duel"
+                     address={ `f1am3d.servegame.com:${ serverPorts.duel }` }/>
 
         <hr/>
 
-        <ServerStats stats={ duelStats }
-                     image={ mapImageUrl }
-                     address={ `f1am3d.servegame.com:${ serverPorts.duel }` }/>
+        <ServerStats stats={ dmStats }
+                     image={ dmMapImageUrl }
+                     gameType="DM"
+                     address={ `f1am3d.servegame.com:${ serverPorts.dm }` }/>
 
         <hr/>
 

@@ -9,7 +9,7 @@ import { formatBytes } from "../../utils/files.utils";
 import { AppFileList, loadFileList } from "../../api/files.api";
 import { downloadFileThunk, ModType } from "src/store/thunks/download.thunk";
 import { ServerStats } from "../ServerStats";
-import { ServerStatsPayload } from "../../../../shared/types";
+import { IDTech2, ServerStatsPayload } from "../../../../shared/types";
 import { loadMonitoringStats } from "../../api/monitor.api";
 import { getGameTrackerMapImageUrl } from "../../utils/game-tracker.utils";
 import { AppTitleSmall } from "../AppTitleSmall";
@@ -34,7 +34,7 @@ export function QuakeQ2Page() {
             throw error;
         });
 
-        loadMonitoringStats('quake2', serverPort).then((data) => {
+        loadMonitoringStats<IDTech2>('quake2', serverPort).then((data) => {
             const url = getGameTrackerMapImageUrl(data);
 
             setStats(data);
@@ -55,6 +55,7 @@ export function QuakeQ2Page() {
 
         <ServerStats stats={ stats }
                      image={ mapImageUrl }
+                     gameType="DM"
                      address={ `f1am3d.servegame.com:${ serverPort }` }/>
 
         <hr/>

@@ -6,16 +6,16 @@ import { ServerStatsPayload } from '@app/shared/types';
 interface Props {
     stats: ServerStatsPayload
     address: string
+    gameType?: string
     image?: string
 }
 
-export function ServerStats({ stats, image, address }: Props) {
+export function ServerStats({ stats, image, address, gameType }: Props) {
     const {
         name,
         map,
         players,
         bots,
-        gameType,
         password,
         maxPlayers
     } = stats;

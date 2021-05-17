@@ -9,7 +9,7 @@ import { formatBytes } from "../../utils/files.utils";
 import { AppFileList, loadFileList } from "../../api/files.api";
 import { downloadFileThunk, ModType } from "../../store/thunks/download.thunk";
 import { ServerStats } from "../ServerStats";
-import { ServerStatsPayload } from "../../../../shared/types";
+import { IDTech3, ServerStatsPayload } from "../../../../shared/types";
 import { loadMonitoringStats } from "../../api/monitor.api";
 import { getGameTrackerMapImageUrl } from "../../utils/game-tracker.utils";
 import { AppTitleSmall } from "../AppTitleSmall";
@@ -35,7 +35,7 @@ export function QuakeCPMAPage() {
             throw error;
         });
 
-        loadMonitoringStats('quake3', serverPort).then((data) => {
+        loadMonitoringStats<IDTech3>('quake3', serverPort).then((data) => {
             const url = getGameTrackerMapImageUrl(data);
 
             setStats(data);
@@ -57,6 +57,7 @@ export function QuakeCPMAPage() {
 
         <ServerStats stats={ stats }
                      image={ mapImageUrl }
+                     gameType="Duel"
                      address={ `f1am3d.servegame.com:${ serverPort }` }/>
 
         <hr/>

@@ -3,12 +3,12 @@ import { exec } from "child_process";
 import { Type } from 'gamedig';
 import { ConfigService } from "./config.service";
 import {
-    AppGameType, AppStatsError,
+    AppGameType,
+    AppStatsError,
     AppStatsQueryResult,
     IDTech1,
     IDTech2,
     IDTech3,
-    RawData,
     ServerStatsPayload
 } from "@app/shared/types";
 
@@ -56,7 +56,6 @@ export class StatsService {
             map
         } = result;
 
-        const gameType = this.getGameType(raw);
         const gameMap = (<IDTech1>raw).map ?? (<IDTech2>raw).mapname ?? (<IDTech3>raw).mapname;
 
         return {
@@ -67,31 +66,7 @@ export class StatsService {
             players,
             bots,
             maxPlayers,
-            gameType,
+            raw
         };
-    }
-
-    private getGameType(raw: RawData): string {
-        const commonQuakeType = ( <IDTech2>raw )?.match_type ?? ( <IDTech3>raw )?.g_gametype;
-        let q1Type: string = '';
-
-        if (( <IDTech1>raw ).deathmatch) {
-            switch (( <IDTech1>raw )?.deathmatch) {
-                case '1':
-                    q1Type = 'DM';
-                    break;
-                case '2':
-                    q1Type = 'TDM';
-                    break;
-                case '3':
-                    q1Type = 'Duel';
-                    break;
-                default:
-                    q1Type = 'DM';
-                    break;
-            }
-        }
-
-        return q1Type ?? commonQuakeType;
     }
 }
