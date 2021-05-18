@@ -3,7 +3,7 @@ export * from './app-stats-error.interface';
 export * from './idtech1-config';
 export * from './idtech2-config';
 export * from './idtech3-config';
-export * from './res-server-stats.interface';
+export * from './server-stats-payload.interface';
 export * from './valheim-config';
 export * from './raw-data.type';
 export * from './game-type.type';
