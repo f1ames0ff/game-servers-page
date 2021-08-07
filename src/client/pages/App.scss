@@ -1,0 +1,92 @@
+@import "./theme.module";
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  background: $app-container;
+
+  #root {
+    height: auto;
+    min-height: 100%;
+  }
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  monospace;
+}
+
+* {
+  color: $app-text;
+}
+
+#navbar {
+  > div {
+    position: fixed;
+    width: 100%;
+    padding: 0;
+    z-index: 5;
+  }
+}
+
+.App {
+  &-root-wrapper {
+    background-size: 100% auto;
+    background-repeat: revert;
+    background-position: top;
+  }
+
+  &-container {
+    background-color: $app-container;
+
+    > header {
+    }
+
+    > section {
+      margin-top: 40px;
+    }
+
+    > footer {
+    }
+  }
+
+  &-nav-link, &-nav-link:visited {
+    @extend .nav-link;
+
+    cursor: pointer;
+    display: inline-block;
+    padding: 0;
+    color: $app-link;
+    font-weight: bold;
+
+    &:hover {
+      color: $app-link-hover;
+    }
+  }
+
+  &-list-group {
+    @extend .list-group;
+
+    > .list-group-item {
+      color: $app-text;
+      background-color: $app-container;
+    }
+  }
+
+  &-badge {
+    @extend .badge;
+    background-color: $app-badge-bg;
+    color: $app-badge-text;
+  }
+}
+
+.game-page {
+  background-color: $app-container;
+}
