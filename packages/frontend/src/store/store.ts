@@ -1,4 +1,4 @@
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import {combineReducers, configureStore} from "@reduxjs/toolkit";
 import generalSlice from "./reducers/app.reducer";
 
 export const appStore = configureStore({

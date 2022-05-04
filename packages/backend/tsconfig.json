@@ -1,12 +1,13 @@
 {
-  "extends": "./../../tsconfig.base.json",
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "lib": [
-      "ESNext"
+    "types": [
+      "node"
     ],
     "jsx": "react-jsx",
     "target": "ESNext",
     "module": "CommonJS",
+    "moduleResolution": "Node",
     "sourceMap": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true

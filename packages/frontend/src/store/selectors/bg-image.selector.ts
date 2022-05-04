@@ -1,5 +1,3 @@
-import { appStore } from "../store";
+import {AppState} from "../store";
 
-export function selectBgImage() {
-    return appStore.getState().general.background;
-}
+export const selectBgImage = (state: AppState) => state.general.background;

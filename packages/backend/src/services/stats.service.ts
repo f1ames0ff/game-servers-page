@@ -1,9 +1,8 @@
-import { Injectable } from "@nestjs/common";
-import gamedig, { Type } from 'gamedig';
-import { ConfigService } from "./config.service";
-import { AppGameType, AppStatsQueryResult, IDTech1, IDTech2, IDTech3, ServerStatsPayload } from "@app/shared/types";
-
-export type GameType = AppGameType & Type;
+import {Injectable} from "@nestjs/common";
+import gamedig from 'gamedig';
+import {ConfigService} from "./config.service";
+import {AppStatsQueryResult, IDTech1, IDTech2, IDTech3, ServerStatsPayload} from "@app/shared/types";
+import {GameType} from "./types";
 
 @Injectable()
 export class StatsService {

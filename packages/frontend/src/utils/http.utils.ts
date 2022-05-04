@@ -1,6 +1,5 @@
-export function getHostAddress() {
-    const { hostname, port, protocol } = window.location;
+import {SERVER_PORT, SERVER_URL} from "../constants";
 
-    // return `${ protocol }//${ hostname }:${ port }`;
-    return process.env.REACT_APP_SERVER_ADDRESS;
+export function getHostAddress() {
+    return `${SERVER_URL}:${SERVER_PORT}`;
 }

@@ -1,6 +1,6 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import { downloadFile } from "../../api/files.api";
-import { blobToFileDownload } from "../../utils/files.utils";
+import {createAsyncThunk} from "@reduxjs/toolkit";
+import {downloadFile} from "../../api/files.api";
+import {blobToFileDownload} from "../../utils";
 
 export type ModType = 'required' | 'optional';
 
@@ -12,10 +12,10 @@ export interface DownloadFileThunkParams {
 
 export const downloadFileThunk = createAsyncThunk(
     'files/download',
-    async ({ type, modType, name }: DownloadFileThunkParams, thunkAPI) => {
-        const uri = `${ type }/${ modType }/${ name }`;
+    async ({type, modType, name}: DownloadFileThunkParams, thunkAPI) => {
+        const uri = `${type}/${modType}/${name}`;
         const buffer = await downloadFile(uri);
 
-        blobToFileDownload(new Blob([ buffer ]), name);
+        blobToFileDownload(new Blob([buffer]), name);
     }
 );

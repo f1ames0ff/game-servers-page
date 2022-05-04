@@ -1,15 +1,8 @@
-import { Injectable } from "@nestjs/common";
+import {Injectable} from "@nestjs/common";
 import fsPromises from "fs/promises";
 import path from "path";
-import { Response } from "express";
-
-interface FileInfo {
-    size: number;
-}
-
-export interface FileMap {
-    [key: string]: FileMap | FileInfo
-}
+import {Response} from "express";
+import {FileMap} from "./types";
 
 @Injectable()
 export class FilesService {

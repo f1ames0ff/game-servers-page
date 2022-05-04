@@ -1,4 +1,4 @@
-import { ServerStatsPayload } from "../../../shared/types";
+import {ServerStatsPayload} from "@app/shared/types";
 
 export function getGameTrackerGameType(type: string) {
     switch (type) {
@@ -11,11 +11,11 @@ export function getGameTrackerGameType(type: string) {
     }
 }
 
-export function getGameTrackerMapImageUrl({ type, map }: ServerStatsPayload) {
+export function getGameTrackerMapImageUrl({type, map}: ServerStatsPayload) {
     const typeUri = getGameTrackerGameType(type);
 
     if (typeUri) {
-        return `https://image.gametracker.com/images/maps/160x120/${ typeUri }/${ map }.jpg`
+        return `https://image.gametracker.com/images/maps/160x120/${typeUri}/${map}.jpg`
     }
 
     return '';

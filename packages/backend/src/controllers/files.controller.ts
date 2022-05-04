@@ -1,6 +1,7 @@
 import { Controller, Get, Header, HttpCode, Query, Res } from "@nestjs/common";
 import { Response } from "express";
-import { FileMap, FilesService } from "../services/files.service";
+import { FilesService } from "../services/files.service";
+import {FileMap} from "../services/types";
 
 @Controller('files')
 export class FilesController {

@@ -1,10 +1,6 @@
-import { Injectable } from "@nestjs/common";
+import {Injectable} from "@nestjs/common";
 import path from "path";
-
-interface Config {
-    host: string
-    port: number
-}
+import {Config} from "./types";
 
 @Injectable()
 export class ConfigService implements Config {

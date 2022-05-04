@@ -4,17 +4,17 @@ import './index.scss';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/App';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter } from "react-router-dom";
-import { appStore } from "./store/store";
-import { Provider } from 'react-redux';
+import {BrowserRouter} from "react-router-dom";
+import {appStore} from "./store/store";
+import {Provider} from 'react-redux';
+import App from './components/app/App';
 
 
 ReactDOM.render(
     <React.StrictMode>
         <BrowserRouter>
-            <Provider store={ appStore }>
+            <Provider store={appStore}>
                 <App/>
             </Provider>
         </BrowserRouter>
