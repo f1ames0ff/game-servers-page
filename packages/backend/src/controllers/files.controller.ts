@@ -1,6 +1,6 @@
-import { Controller, Get, Header, HttpCode, Query, Res } from "@nestjs/common";
-import { Response } from "express";
-import { FilesService } from "../services/files.service";
+import {Controller, Get, Header, HttpCode, Query, Res} from "@nestjs/common";
+import {Response} from "express";
+import {FilesService} from "../services/files.service";
 import {FileMap} from "../services/types";
 
 @Controller('files')
@@ -11,14 +11,19 @@ export class FilesController {
     @Get('list')
     @HttpCode(200)
     @Header('Content-Type', 'application/json')
-    async list(@Query('type') type: string): Promise<FileMap> {
+    async list(
+        @Query('type') type: string
+    ): Promise<FileMap> {
         return await this.filesService.fileList(type);
     }
 
     @Get('download')
     @HttpCode(200)
     @Header('Content-Type', 'application/octet-stream')
-    file(@Query('fileName') fileName: string, @Res() response: Response) {
+    file(
+        @Query('fileName') fileName: string,
+        @Res() response: Response
+    ) {
         this.filesService.download(fileName, response);
     }
 }

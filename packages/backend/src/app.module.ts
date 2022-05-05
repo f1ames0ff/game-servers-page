@@ -6,6 +6,7 @@ import { StatsService } from "./services/stats.service";
 import { ConfigService } from "./services/config.service";
 import { AppExceptionFilter } from './filters/exception.filter';
 import { APP_FILTER } from '@nestjs/core';
+import {DbService} from "./services/db.service";
 
 @Module({
     controllers: [
@@ -16,6 +17,7 @@ import { APP_FILTER } from '@nestjs/core';
         FilesService,
         StatsService,
         ConfigService,
+        DbService,
         {
             provide: APP_FILTER,
             useClass: AppExceptionFilter,

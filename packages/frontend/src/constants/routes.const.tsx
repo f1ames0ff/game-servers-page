@@ -1,9 +1,10 @@
 import {ValheimPage} from "../components/pages/valheim/ValheimPage";
 import React from "react";
-import {DiscordPage} from "../components/pages/DiscordPage";
-import {HomePage} from "../components/pages/HomePage";
-import {QuakePage} from "../components/pages/QuakePage";
-import {SupportPage} from "../components/pages/SupportPage";
+import {DiscordPage} from "../components/pages";
+import {HomePage} from "../components/pages";
+import {QuakePage} from "../components/pages";
+import {SupportPage} from "../components/pages";
+import {CmsPage} from "../components/pages/cms/CmsPage";
 
 
 export const ROUTES = [
@@ -31,5 +32,10 @@ export const ROUTES = [
         name: 'Support Us',
         path: '/support',
         component: <SupportPage/>
+    },
+    {
+        name: '',
+        path: '/cms',
+        component: <CmsPage/>
     },
 ]
